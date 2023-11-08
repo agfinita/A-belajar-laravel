@@ -1,0 +1,19 @@
+.baris::after {
+    margin-right: 20px;
+}
+
+.nav-fs {
+    font-family: Arial, 'Helvetica', sans-serif;
+}
+
+.fs {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.col-width {
+    width: 15%;
+}
+
+hr {
+    border: 2px solid rgb(149, 149, 149);
+}
