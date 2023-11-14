@@ -1,0 +1,1 @@
+@include('adminLTE.pages.content')
