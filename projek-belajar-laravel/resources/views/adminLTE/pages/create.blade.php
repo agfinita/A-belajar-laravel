@@ -38,36 +38,61 @@
                         @endif
 
                         <!-- form start -->
-                        <form action="{{ url('/master/table') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('/product') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Product Name</label>
+                                    <label for="name" class="lbl">Product Name</label>
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Enter name of product" autocomplete="off" />
+
+                                    @if (count($errors) > 0)
+                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                            {{ $errors->first('name') }}
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="category">Category Product</label></br>
+                                    <label for="category" class="lbl">Category Product</label></br>
                                     <select class="form-control" aria-label="Default select example" id="category"
                                         name="category">
-                                        <option value="1"> Sports </option>
-                                        <option value="2"> Daily </option>
-                                        <option value="3"> Accessories </option>
-                                        <option value="4"> Electronic </option>
+                                        <option value="0">- Select Category -</option>
+                                        <option value="1"> Dual Sport </option>
+                                        <option value="2"> Sport </option>
+                                        <option value="3"> Touring </option>
+                                        <option value="4"> Commuter </option>
                                     </select>
+
+                                    @if (count($errors) > 0)
+                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                            {{ $errors->first('category') }}
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Product Code</label>
+                                    <label for="code" class="lbl">Product Code</label>
                                     <input type="text" class="form-control" id="code" name="code"
                                         placeholder="Enter code of product" autocomplete="off" />
+
+                                    @if (count($errors) > 0)
+                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                            {{ $errors->first('code') }}
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="price">Price</label>
+                                    <label for="price" class="lbl">Price</label>
                                     <input type="text" class="form-control" id="price" name="price"
                                         placeholder="Enter price of product" autocomplete="off" />
+
+                                    @if (count($errors) > 0)
+                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                            {{ $errors->first('price') }}
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
@@ -77,28 +102,39 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="unit">Unit Product</label>
+                                    <label for="unit" class="lbl">Unit Product</label>
                                     <input type="text" class="form-control" id="unit" name="unit"
-                                        placeholder="Enter unit product" autocomplete="off" />
+                                        placeholder="Enter unit of product" autocomplete="off" />
+
+                                        @if (count($errors) > 0)
+                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                            {{ $errors->first('unit') }}
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="stock">Stock Product</label>
+                                    <label for="stock" class="lbl">Stock Product</label>
                                     <input type="text" class="form-control" id="stock" name="stock"
                                         placeholder="Enter stock of product" autocomplete="off" />
+
+                                    @if (count($errors) > 0)
+                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                            {{ $errors->first('stock') }}
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="disc">Discount</label>
+                                    <label for="disc" class="lbl">Discount</label>
                                     <input type="text" class="form-control" id="disc" name="disc"
                                         placeholder="Enter discount of product" autocomplete="off" />
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="image">Image Product</label>
-                                    <input type="file" class="form-control-file" name="image" id="image"
-                                        name="image[]" multiple />
-
+                                        @if (count($errors) > 0)
+                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                            {{ $errors->first('disc') }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <!-- /.card-body -->

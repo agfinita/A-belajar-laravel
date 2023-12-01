@@ -1,13 +1,10 @@
 <?php
 
-use App\Http\Controllers\ShowProductController;
-use App\Http\Controllers\AddProductController;
-use App\Http\Controllers\AdminLTEController;
-use App\Http\Controllers\BiodataController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HelloController;
-use App\Http\Controllers\SearchProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminLTEController;
+use App\Http\Controllers\SearchProductController;
+use App\Http\Controllers\ShowProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,35 +18,37 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('hello');
 });
 
-// Route::get('/home', function() {    // ini membuat view tanpa controller, kalau pakai controller maka harus import controller dulu
-//     return view('home');
-// });
+Route::get('/biodata',function() {
+    return view('biodata');
+});
 
-// ini import controllernya untuk menampilkan view
-// Route::get('/hello',[NavbarController::class, 'index']);
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/hello', [HelloController::class, 'helo']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [AdminLTEController::class, 'index']);
+    Route::get('/search', [SearchProductController::class, 'search']);
+    // create
+    Route::get('/create', [ShowProductController::class, 'create']);
+    // show or read
+    Route::get('/product', [ShowProductController::class, 'index']);
+    // insert
+    Route::post('/product', [ShowProductController::class, 'insert']);
+    // update
+    Route::get('/product/edit/{id}', [ShowProductController::class, 'update']);
+    Route::patch('/product/edit/{id}', [ShowProductController::class, 'updateProcess']);
+    // delete
+    Route::delete('/product/{id}', [ShowProductController::class, 'delete']);
+});
 
-Route::get('/biodata', [BiodataController::class, 'bio']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/master', [AdminLTEController::class, 'tampil']);
-
-// Create product
-Route::get('/master/create', [AddProductController::class, 'addShow']);
-// Display product
-Route::get('/master/table', [ShowProductController::class, 'readShow']);
-// Post form create product
-Route::post('/master/table', [ShowProductController::class, 'addProcess']);
-// Update product
-Route::get('/master/edit/{id}', [ShowProductController::class, 'update']);
-Route::patch('/master/edit/{id}', [ShowProductController::class, 'updateProcess']);
-// Delete product
-Route::delete('/master/table/{id}', [ShowProductController::class, 'delete']);
-// Fitur search
-Route::get('/master/search', [SearchProductController::class, 'search']);
-
-
-Route::get('/master/table/category', [CategoryController::class, 'index']);
+require __DIR__.'/auth.php';

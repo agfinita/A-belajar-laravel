@@ -1,4 +1,4 @@
-label::after {
+.lbl::after {
     content: "*";
     color: red;
 }

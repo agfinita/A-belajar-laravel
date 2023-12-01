@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class ShowProductController extends Controller {
+    // create product
+    public function create() {
+        return view ('adminLTE.pages.create');
+    }
+
     // display product
-    public function readShow() {
+    public function index() {
         $products = DB::table('products')
                     ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
                     ->orderBy('products.id', 'DESC')
@@ -17,24 +23,32 @@ class ShowProductController extends Controller {
     }
 
     // insert data
-    public function addProcess(Request $request) {
-        if (($request->name) && ($request->category) && ($request->code) && ($request->price) && ($request->desc) && ($request->unit) && ($request->stock) && ($request->disc) ) {
-            DB::table('products')->insert([
-                'product_name'  => $request->name,
-                'category_id'   => $request->category,
-                'product_code'  => $request->code,
-                'price'         => $request->price,
-                'description'   => $request->desc,
-                'unit'          => $request->unit,
-                'stock'         => $request->stock,
-                'discount'      => $request->disc
-            ]);
-            // redirect with flashed
-            return redirect('/master/table')->with('status', 'Data successfully add!');
-        } else {
-            // redirect with flashed
-            return redirect('/master/create')->with('status', 'Please complete the data first!');
-        }
+    public function insert(Request $request) {
+        $validatedData  = $request->validate([
+            'name'      => 'required',
+            'category'  => 'required|not_in:0',
+            'code'      => 'required|unique:products,product_code',
+            'price'     => 'required|numeric',
+            'desc'      => 'nullable',
+            'unit'      => 'required',
+            'stock'     => 'required|numeric',
+            'disc'      => 'required|numeric',
+        ]);
+
+        // data berhasil divalidasi
+        DB::table('products')->insert([
+                'product_name'  => $validatedData['name'],
+                'category_id'   => $validatedData['category'],
+                'product_code'  => $validatedData['code'],
+                'price'         => $validatedData['price'],
+                'description'   => $validatedData['desc'],
+                'unit'          => $validatedData['unit'],
+                'stock'         => $validatedData['stock'],
+                'discount'      => $validatedData['disc'],
+        ]);
+
+        // redirect with flashed
+        return redirect('/product')->with('status', 'Data successfully add!');
     }
 
     // update/edit data
@@ -44,23 +58,42 @@ class ShowProductController extends Controller {
     }
 
     public function updateProcess(Request $request, $id) {
+        $products   = DB::table('products')->where('id', $id)->first();
+
+        $validatedData  = $request->validate([
+            'name'      => 'required',
+            'category'  => 'required|not_in:0',
+            'code'      =>  [
+                                'required',
+                                Rule::unique('products', 'product_code')->ignore($id)->where(function () use ($request, $products) {
+                                    return $request->code != $products->product_code;
+                                }),
+                            ],
+            'price'     => 'required|numeric',
+            'desc'      => 'nullable',
+            'unit'      => 'required',
+            'stock'     => 'required|numeric',
+            'disc'      => 'required|numeric',
+        ]);
+
+        // data berhasil divalidasi
         DB::table('products')->where('id', $id)->update([
-            'product_name'  => $request->name,
-            'category_id'   => $request->category,
-            'product_code'  => $request->code,
-            'price'         => $request->price,
-            'description'   => $request->desc,
-            'unit'          => $request->unit,
-            'stock'         => $request->stock,
-            'discount'      => $request->disc,
+            'product_name'  => $validatedData['name'],
+            'category_id'   => $validatedData['category'],
+            'product_code'  => $validatedData['code'],
+            'price'         => $validatedData['price'],
+            'description'   => $validatedData['desc'],
+            'unit'          => $validatedData['unit'],
+            'stock'         => $validatedData['stock'],
+            'discount'      => $validatedData['disc'],
         ]);
         // redirect with flashed
-        return redirect('/master/table')->with('status', 'Data updated successfully!');
+        return redirect('/product')->with('status', 'Data updated successfully!');
     }
 
     // delete data
     public function delete($id) {
         DB::table('products')->where('id', $id)->delete();
-        return redirect ('/master/table')->with('status', 'Data deleted successfully!');
+        return redirect ('/product')->with('status', 'Data deleted successfully!');
     }
 }
