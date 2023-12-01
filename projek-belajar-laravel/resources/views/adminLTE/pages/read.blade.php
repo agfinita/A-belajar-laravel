@@ -32,7 +32,7 @@
                     @endif
 
                     <div class="mb-2">
-                        <button type="submit" class="btn btn-success"><a href="{{ url('/master/create') }}"
+                        <button type="submit" class="btn btn-success"><a href="{{ url('/create') }}"
                                 class="text-decoration-none text-white">+ Tambah Data</a></button>
                     </div>
                     <!-- Table update and delete -->
@@ -70,13 +70,13 @@
                                         <td scope="row">{{ $p->discount }}</td>
                                         <td scope="row">{{ $p->image }}</td>
                                         <td scope="row">
-                                            <a href="{{ url('/master/edit/' . $p->id) }}">
+                                            <a href="{{ url('/product/edit/' . $p->id) }}">
                                                 <button type="button" class="btn btn-warning btn-sm">
                                                     <i class="fa-solid fa-pen-to-square fa-sm"></i>
                                                 </button>
                                             </a>
 
-                                            <form action="{{ url('/master/table/' . $p->id) }}" method="POST"
+                                            <form action="{{ url('/product/'. $p->id) }}" method="POST"
                                                 class="d-inline" onsubmit="return confirm('Are you sure delete data?')">
                                                 @method('delete')
                                                 @csrf

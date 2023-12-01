@@ -38,23 +38,13 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="/master" class="nav-link">
+                    <a href="/dashboard" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
-                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/master" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
-                <li class="nav-header">EXAMPLES</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
@@ -65,13 +55,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ url('/master/create') }}" class="nav-link">
+                            <a href="{{ url('/create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Product</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('/master/table') }}" class="nav-link">
+                            <a href="{{ url('/product') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Table Product</p>
                             </a>
@@ -79,21 +69,12 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{url('/search')}}" class="nav-link">
                         <i class="nav-icon fas fa-search"></i>
                         <p>
                             Search Product
-                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{url('/master/search')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Search</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>
