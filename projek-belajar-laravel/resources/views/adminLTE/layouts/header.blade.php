@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>FSWD Agfinita</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -49,6 +49,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             @yield('konten')
+            @yield('script')
         </div>
         <!-- /.content-wrapper -->
 
@@ -90,6 +91,8 @@
     <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
+    {{-- Highchart --}}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 </body>
 
 </html>
