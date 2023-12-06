@@ -244,7 +244,7 @@
                         marker: {
                             symbol: 'star'
                         },
-                        data: [{{ $total3Nov }}, 0]
+                        data: [{{ $total3Nov }}, {{ $total3Des }}]
                     },
                     {
                         name: 'Commuter',

@@ -35,6 +35,7 @@ class AdminLTEController extends Controller {
         $total4Nov          = $totalPerCategory[2]->total_harga;
         $total1Des          = $totalPerCategory[6]->total_harga;
         $total2Des          = $totalPerCategory[4]->total_harga;
+        $total3Des          = $totalPerCategory[7]->total_harga;
         $total4Des          = $totalPerCategory[5]->total_harga;
 
         // jumlah stok produk per kategori
@@ -64,6 +65,7 @@ class AdminLTEController extends Controller {
                                                 'total4Nov'             => $total4Nov,
                                                 'total1Des'             => $total1Des,
                                                 'total2Des'             => $total2Des,
+                                                'total3Des'             => $total3Des,
                                                 'total4Des'             => $total4Des,
                                                 'stockPerCategory'      => $stockPerCategory,
                                                 'stock1'                => $stock1,

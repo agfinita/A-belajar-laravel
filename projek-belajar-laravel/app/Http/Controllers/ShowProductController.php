@@ -13,7 +13,7 @@ class ShowProductController extends Controller {
     }
 
     // display product
-    public function index() {
+    public function show() {
         $products = DB::table('products')
                     ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
                     ->orderBy('products.id', 'DESC')

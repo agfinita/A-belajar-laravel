@@ -31,9 +31,15 @@
                         </div>
                     @endif
 
-                    <div class="mb-2">
-                        <button type="submit" class="btn btn-success"><a href="{{ url('/create') }}"
-                                class="text-decoration-none text-white">+ Tambah Data</a></button>
+                    <div class="container row col mb-2 d-flex justify-content-between">
+                        <button type="submit" class="btn btn-success"><a href="{{ url('/create') }}" class="text-decoration-none text-white">
+                            <i class="fa-solid fa-add fa-sm"></i> Tambah Data
+                        </a></button>
+
+                        <form action="{{ url('/product/search') }}" method="GET" class="d-flex col-3" role="search">
+                            <input class="form-control" type="search" name="keyword" placeholder="Search" aria-label="Search" value="{{ $keyword ?? '' }}" autocomplete="off">
+                            <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-search fa-sm"></i></button>
+                        </form>
                     </div>
                     <!-- Table update and delete -->
                     <div class="card card-primary">
@@ -76,8 +82,8 @@
                                                 </button>
                                             </a>
 
-                                            <form action="{{ url('/product/'. $p->id) }}" method="POST"
-                                                class="d-inline" onsubmit="return confirm('Are you sure delete data?')">
+                                            <form action="{{ url('/product/' . $p->id) }}" method="POST" class="d-inline"
+                                                onsubmit="return confirm('Are you sure delete data?')">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger btn-sm">
@@ -94,9 +100,9 @@
                         <!-- Pagination button start -->
                         <div class="d-flex justify-content-between">
                             <ul style="list-style-type: none">
-                                <li> {{ "Data per page: " . $products->perPage() }} </li>
-                                <li> {{ "Total data: " . $products->total() }} </li>
-                                <li> {{ "Data show: " . $products->firstItem() . "-" . $products->lastItem() }} </li>
+                                <li> {{ 'Data per page: ' . $products->perPage() }} </li>
+                                <li> {{ 'Total data: ' . $products->total() }} </li>
+                                <li> {{ 'Data show: ' . $products->firstItem() . '-' . $products->lastItem() }} </li>
                             </ul>
                             <div class="mr-5 my-auto">
                                 {!! $products->links() !!}

@@ -31,11 +31,11 @@ Route::get('/biodata',function() {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [AdminLTEController::class, 'index']);
-    Route::get('/search', [SearchProductController::class, 'search']);
+    Route::get('/product/search', [SearchProductController::class, 'search']);
     // create
     Route::get('/create', [ShowProductController::class, 'create']);
     // show or read
-    Route::get('/product', [ShowProductController::class, 'index']);
+    Route::get('/product', [ShowProductController::class, 'show']);
     // insert
     Route::post('/product', [ShowProductController::class, 'insert']);
     // update
