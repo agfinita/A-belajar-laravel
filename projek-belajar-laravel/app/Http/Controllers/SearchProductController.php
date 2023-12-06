@@ -12,7 +12,7 @@ class SearchProductController extends Controller {
         $products   = DB::table('products')
                     ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
                     ->where('products.product_name', 'like', '%'. $keyword . '%')
-                    ->orWhere('products.category_id', 'like', '%' . $keyword . '%')
+                    ->orWhere('product_categories.category_name', 'like', '%' . $keyword . '%')
                     ->orWhere('products.description', 'like', '%' . $keyword . '%')
                     ->orderBy('products.id', 'ASC')
                     ->select('products.*', 'products.id', 'product_categories.category_name')
